@@ -1,5 +1,4 @@
 <?php
-include 'config/database.php';
 session_start();
 if (isset($_SESSION['countViewPage'])) {
     $_SESSION['countViewPage']++;
@@ -33,8 +32,5 @@ if (isset($action)) {
 } else {
     $route = $routes[''];
 }
-
-require 'pages/header.php';
-require $route;
-require 'pages/footer.php';
+include 'config/database.php';
 
