@@ -1,5 +1,7 @@
 <?php
+require './app/persistences/blogPostData.php';
 
 echo "helloworld";
-lastBlogPosts($db);
-var_dump($db);
+
+$lastPosts = lastBlogPosts($pdo);
+var_dump($lastPosts);

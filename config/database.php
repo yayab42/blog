@@ -1,4 +1,5 @@
 <?php
 $user='usertest';
 $pass='usertest';
-$pdo =new PDO('mysql:host=localhost;dbname=blog', $user,$pass);
+$dbName ='blog';
+$pdo =new PDO("mysql:host=localhost;dbname={$dbName}", $user,$pass);

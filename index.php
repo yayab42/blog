@@ -1,36 +1,23 @@
 <?php
-session_start();
-if (isset($_SESSION['countViewPage'])) {
-    $_SESSION['countViewPage']++;
-} else {
-    $_SESSION['countViewPage'] = 0;
-}
-if (!isset($_SESSION['dateFirstVisit'])) {
-    $_SESSION['dateFirstVisit'] =  date('Y-m-d-H-i-s');
-}
-
+error_reporting(E_ALL);
+ini_set('display_errors',true);
 
 $routes = array(
-    "index" => '/app/controllers/homeController.php',
-    "" => '',
+    "home" => 'app/controllers/homeController.php',
     "" => '',
     "" => '',
     "404" => 'pages/404.php',
 );
 
-$page = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-
-
-
-if (isset($action)) {
-    if (array_key_exists($page, $routes)) {
-        $route = $routes[$page];
-    } else {
-        header("HTTP/1.0 404 Not Found");
-        $route = $routes['404'];
+if (filter_has_var(INPUT_GET,'action')) {
+    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    if (!array_key_exists($action, $routes)) {
+        $action = '404';
     }
 } else {
-    $route = $routes['index'];
+    $action ='home';
 }
-include 'config/database.php';
-require 'app/controllers/homeController.php';
+require 'config/database.php';
+$route = $routes[$action];
+require $route;
+
