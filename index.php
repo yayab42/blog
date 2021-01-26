@@ -4,7 +4,7 @@ ini_set('display_errors',true);
 
 $routes = array(
     "home" => 'app/controllers/homeController.php',
-    "" => '',
+    "blogPost" =>'app/controllers/blogPostController.php',
     "" => '',
     "404" => 'pages/404.php',
 );
