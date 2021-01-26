@@ -3,7 +3,9 @@ $lastPosts = lastBlogPosts($pdo);
 
 
 if (!empty($lastPosts)){
-    var_dump($lastPosts);
+    foreach ($lastPosts as $row){
+        echo "<li>" . $row['title_article'] . " par " . $row['nickname'] . "</li> <br>";
+    }
 } else {
     echo "Il n'y a pas de données à afficher";
 }
