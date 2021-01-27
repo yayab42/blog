@@ -1,7 +1,7 @@
 <?php
 function lastBlogPosts(PDO $db): array
 {
-    $result = $db->query('SELECT title_article, text_article, nickname FROM articles INNER JOIN author LIMIT 10');
+    $result = $db->query('SELECT title_article, text_article, nickname FROM articles INNER JOIN author ON author_id = author.id LIMIT 10');
     return $result->fetchAll();
 }
 
