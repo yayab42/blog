@@ -16,3 +16,10 @@ function commentsByBlogPost(PDO $db, $articleNumber): array
     $result = $db->query('SELECT text_commentary, articles_id, commentaries.author_id FROM commentaries INNER JOIN articles ON articles_id= articles.id');
     return $result->fetch(PDO::FETCH_ASSOC);
 }
+
+function blogPostCreate(PDO $db, $title_article, $text_article, $publication_date, $publication_enddate, $importance, $author_id): array
+{
+    $result = $db->query('INSERT INTO articles(title_article, text_article, publication_date, publication_enddate, importance, $author_id)
+VALUES($title_article, $text_article, $publication_date, $publication_enddate, $importance, $author_id)');
+    return $result->fetch(PDO::FETCH_ASSOC);
+}
