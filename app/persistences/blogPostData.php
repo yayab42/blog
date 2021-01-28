@@ -17,9 +17,18 @@ function commentsByBlogPost(PDO $db, $articleNumber): array
     return $result->fetch(PDO::FETCH_ASSOC);
 }
 
-function blogPostCreate(PDO $db, $title_article, $text_article, $publication_date, $publication_enddate, $importance, $author_id): array
+function blogPostCreate(PDO $db, array $postArray): bool
 {
-    $result = $db->query('INSERT INTO articles(title_article, text_article, publication_date, publication_enddate, importance, $author_id)
-VALUES($title_article, $text_article, $publication_date, $publication_enddate, $importance, $author_id)');
-    return $result->fetch(PDO::FETCH_ASSOC);
+    var_dump($postArray);
+    $result = $db->prepare('INSERT INTO articles(title_article, text_article, publication_date,
+                     publication_enddate, importance, author_id)
+VALUES(?,?,?,?,?,?)');
+    $result->bindParam(1,$postArray['title_article'], PDO::PARAM_STR);
+    $result->bindParam(2,$postArray['text_article'], PDO::PARAM_STR);
+    $result->bindParam(3,$postArray['publication_date'], PDO::PARAM_STR);
+    $result->bindParam(4,$postArray['publication_enddate'], PDO::PARAM_STR);
+    $result->bindParam(5,$postArray['importance'], PDO::PARAM_INT);
+    $result->bindParam(6,$postArray['author_id'], PDO::PARAM_INT);
+    return $result ->execute();
+
 }

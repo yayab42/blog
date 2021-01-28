@@ -1,7 +1,9 @@
-<?php ?>
+<?php
+
+?>
 
 <main>
-    <form action="index.php?action=blogPostCreateController.php" method="get">
+    <form action="index.php?action=blogPostCreate" method="POST">
         <div>
             <label for = "title_article"> Entrer titre </label>
             <input type="text" name="title_article">
@@ -12,11 +14,11 @@
         </div>
         <div>
             <label for = "publicationDate" Selectionner date de publication</label>
-            <input type="date" name="publicationDate" value="">
+            <input type="date" name="publication_date">
         </div>
         <div>
             <label for = "publicationEndDate" Selectionner date de fin de publication</label>
-            <input type="date" name="publicationEndDate" value="">
+            <input type="date" name="publication_enddate">
         </div>
         <div>
             <label for ="importance">Choisir importance</label>
@@ -32,6 +34,9 @@
         <div>
             <label for ="author_id">Entrer ID auteur</label>
             <input type="text" name="author_id">
+        </div>
+        <div>
+            <input type="submit" value="Envoyer">
         </div>
 
     </form>
