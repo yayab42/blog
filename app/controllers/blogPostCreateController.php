@@ -23,6 +23,6 @@ $postArray = array(
 
 
 $postArticle=blogPostCreate($pdo, $postArray );
-var_dump($postArticle);
+
 }
 require './ressources/views/blogPostCreate.tpl.php';
