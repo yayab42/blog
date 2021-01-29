@@ -63,3 +63,10 @@ WHERE id = :id');
 
     return $result->execute();
 }
+
+function blogPostDelete(PDO $db, $articleNumber)
+{
+$result = $db->prepare('DELETE FROM articles WHERE id=:id');
+$result -> bindParam(':id', $articleNumber, PDO:: PARAM_INT);
+return $result->execute();
+}

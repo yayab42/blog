@@ -4,7 +4,7 @@
 ?>
 
 <main>
-    <form action="index.php?action=blogPostModify&id=<?=$articleNumber?>" method="POST">
+    <form action="<?=$postLink?><?=$articleNumber?>" method="POST">
         <div>
             <label for="title_article"> Entrer titre </label>
             <input type="text" name="title_article" value="<?=$title?>">
@@ -38,6 +38,9 @@
         </div>
         <div>
             <input type="submit" value="Envoyer" name="submit">
+        </div>
+        <div>
+            <a href="index.php?action=blogPostDelete&id=<?=$articleNumber?>">Supprimer</a>
         </div>
 
     </form>

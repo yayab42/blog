@@ -7,6 +7,7 @@ $routes = array(
     "blogPost" =>'app/controllers/blogPostController.php',
     "blogPostCreate" => 'app/controllers/blogPostCreateController.php',
     "blogPostModify"=> 'app/controllers/blogPostModifyController.php',
+    "blogPostDelete"=>'app/controllers/blogPostDeleteController.php',
     "404" => 'pages/404.php',
 );
 

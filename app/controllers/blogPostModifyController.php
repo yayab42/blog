@@ -3,7 +3,7 @@
 require './app/persistences/blogPostData.php';
 
 echo "hello world";
-$articleNumber = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$articleNumber = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $postFetchPost=blogPostById($pdo, $articleNumber);
 
 $title=$postFetchPost['title_article'];
@@ -22,7 +22,7 @@ if (!empty($postFetchPost['title_article'])){
         'importance'=>FILTER_SANITIZE_NUMBER_INT,
         'author_id'=>FILTER_SANITIZE_NUMBER_INT,
     );
-
+$postLink="index.php?action=blogPostModify&id=";
     $modifyArray=filter_input_array(INPUT_POST,$postFetchPost);
 
 //    $title_article= filter_input(INPUT_POST, 'title_article', FILTER_SANITIZE_STRING);
@@ -33,7 +33,14 @@ if (!empty($postFetchPost['title_article'])){
 //    $author_id= filter_input(INPUT_POST, 'author_id', FILTER_SANITIZE_NUMBER_INT);
     if (filter_has_var(INPUT_POST, 'submit')){
     $postModify = blogPostUpdate($pdo, $articleNumber, $modifyArray);
+
     }
+
+
 }
 
+if(filter_has_var(INPUT_POST,'delete')){
+    require 'blogPostDeleteController.php';
+//    $postLink="index.php?action=blogPostDelete&id=";
+}
 require './ressources/views/blogPostUpdate.tlp.php';
