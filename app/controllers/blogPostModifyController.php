@@ -14,6 +14,15 @@ $postImportance=$postFetchPost['importance'];
 $authorId=$postFetchPost['author_id'];
 
 if (!empty($postFetchPost['title_article'])){
+    $postFetchPost= array(
+        'title_article'=>FILTER_SANITIZE_STRING,
+        'text_article'=>FILTER_SANITIZE_STRING,
+        'publication_date'=>FILTER_SANITIZE_STRING,
+        'publication_enddate'=>FILTER_SANITIZE_STRING,
+        'importance'=>FILTER_SANITIZE_NUMBER_INT,
+        'author_id'=>FILTER_SANITIZE_NUMBER_INT,
+    );
+
     $modifyArray=filter_input_array(INPUT_POST,$postFetchPost);
 
 //    $title_article= filter_input(INPUT_POST, 'title_article', FILTER_SANITIZE_STRING);
@@ -24,7 +33,6 @@ if (!empty($postFetchPost['title_article'])){
 //    $author_id= filter_input(INPUT_POST, 'author_id', FILTER_SANITIZE_NUMBER_INT);
     if (filter_has_var(INPUT_POST, 'submit')){
     $postModify = blogPostUpdate($pdo, $articleNumber, $modifyArray);
-    var_dump($postModify);
     }
 }
 
