@@ -34,9 +34,9 @@ VALUES(?,?,?,?,?,?)');
 
 }
 
-function blogPostUpdate(PDO $db, $articleNumber, $postArray ) : bool
+function blogPostUpdate(PDO $db, $articleNumber, $postFetchPost ) : bool
 {
-$result = $db->prepare('UPDATE articles SET
+    $result = $db->prepare('UPDATE articles SET
 id = :id,
 title_article = :title_article ,
 text_article = :text_article,
@@ -45,11 +45,21 @@ publication_enddate = :publication_enddate,
 importance = :importance,
 author_id = :author_id,
 WHERE id = :id');
-  return $result->execute(array(':id'=>$articleNumber,
-                                ':title_article'=>$postArray['title_article'],
-                                ':text_article'=>$postArray['text_article'],
-                                ':publication_date'=>$postArray['publication_date'],
-                                ':publication_enddate'=>$postArray['publication_enddate'],
-                                ':importance'=>$postArray['importance'],
-                                ':author_id'=>$postArray['author_id'],));
+//  return $result->execute(array(':id'=>$articleNumber,
+//                                ':title_article'=>$postArray['title_article'],
+//                                ':text_article'=>$postArray['text_article'],
+//                                ':publication_date'=>$postArray['publication_date'],
+//                                ':publication_enddate'=>$postArray['publication_enddate'],
+//                                ':importance'=>$postArray['importance'],
+//                                ':author_id'=>$postArray['author_id'],));
+//}
+    $result->bindParam(':id', $articleNumber, PDO::PARAM_INT);
+    $result->bindParam(':title_article', $postFetchPost['title_article'], PDO::PARAM_STR);
+    $result->bindParam(':text_article', $postFetchPost['text_article'], PDO::PARAM_STR);
+    $result->bindParam(':publication_date', $postFetchPost['publication_date'], PDO::PARAM_STR);
+    $result->bindParam(':publication_enddate', $postFetchPost['publication_enddate'], PDO::PARAM_STR);
+    $result->bindParam(':importance', $postFetchPost['importance'], PDO::PARAM_INT);
+    $result->bindParam(':author_id', $postFetchPost['author_id'], PDO::PARAM_INT);
+
+    return $result->execute();
 }
